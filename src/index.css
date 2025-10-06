@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/* Global */
+:root{
+  --nexura-purple: #8B5CF6;
+  --nexura-pink: #FB7185;
+  --nexura-yellow: #FAB570;
+  --dark-1: #0f0d1a;
+  --dark-2: #120717;
+  --card-bg: rgba(17,10,19,0.75);
+  --stroke: rgba(255,255,255,0.03);
+}
+
+body {
+  background-color: var(--dark-1);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  
+}
+
+/* Primary text gradient (use on big headings) */
+.text-nexura-gradient {
+  background: linear-gradient(90deg, var(--nexura-purple) 0%, var(--nexura-pink) 50%, var(--nexura-yellow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Utility components & shadows */
+@layer utilities {
+  /* reliable inset shadow defined in CSS (avoids tailwind config caching) */
+  .shadow-inset-md {
+    box-shadow: inset 0 8px 28px rgba(0,0,0,0.65), inset 0 -3px 6px rgba(255,255,255,0.02);
+  }
+  .shadow-inset-lg {
+    box-shadow: inset 0 12px 40px rgba(0,0,0,0.75), inset 0 -4px 8px rgba(255,255,255,0.03);
+  }
+
+  /* thin stroke used around capsules */
+  .capsule-stroke {
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+
+  /* buttons */
+  .btn-gradient {
+    background: linear-gradient(90deg, var(--nexura-purple), var(--nexura-pink) 50%, var(--nexura-yellow));
+    color: white;
+    padding: .5rem 1.25rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 8px 30px rgba(139,92,246,0.08), inset 0 -4px 8px rgba(0,0,0,0.2);
+    transition: transform .18s ease, opacity .18s ease;
+  }
+  .btn-gradient:hover { transform: translateY(-3px); opacity: .96; }
+
+  .btn-outline {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #EDEDED;
+    padding: .45rem 1.1rem;
+    border-radius: 9999px;
+    font-weight: 500;
+  }
+
+  /* nav pills */
+  .nav-pill {
+    @apply rounded-full px-3 py-1 flex items-center gap-2;
+    background-color: var(--navBg, #0b0710);
+    border: 1px solid rgba(255,255,255,0.03);
+    /* use inset shadow */
+    box-shadow: inset 0 6px 18px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(255,255,255,0.02);
+  }
+  .nav-capsule {
+    @apply rounded-full px-6 py-2 flex items-center gap-6;
+    background-color: rgba(17,10,19,0.45);
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: inset 0 10px 30px rgba(0,0,0,0.7), inset 0 -3px 6px rgba(255,255,255,0.02);
+  }
+  .nav-cta-pill {
+    @apply rounded-full px-4 py-1;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: inset 0 6px 20px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(255,255,255,0.04);
+  }
+
+  /* capsule background used for hero & sections */
+  .capsule-bg {
+    border-radius: 2rem;
+    background: linear-gradient(180deg, rgba(18,7,23,0.9), rgba(15,13,26,0.7));
+    border: 1px solid rgba(255,255,255,0.02);
+    box-shadow: inset 0 14px 60px rgba(0,0,0,0.7);
+  }
+
+  /* service card */
+  .service-card {
+    border-radius: 1.5rem;
+
+    border: 1px solid rgba(255,255,255,0.02);
+    padding: 2rem;
+    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.5), inset 0 10px 30px rgba(0,0,0,0.65);
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(0,0,0,0.65); }
+
+  /* icon circle in cards */
+  .icon-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.03), rgba(0,0,0,0.45));
+    box-shadow: 0 8px 24px rgba(0,0,0,0.55), inset 0 6px 18px rgba(255,255,255,0.02);
+  }
+
+  /* small pill learn-more */
+  .learn-pill {
+    border-radius: 9999px;
+    padding: .35rem .9rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    color: #EDEDED;
+    font-size: .875rem;
+  }
+
+  /* newsletter: input pill */
+  .input-pill {
+    width: 100%;
+    padding: .85rem 1rem;
+    border-radius: 9999px;
+    background: rgba(8,6,10,0.55);
+    border: 1px solid rgba(255,255,255,0.03);
+    color: white;
+  }
+
+  /* footer capsule */
+  .footer-capsule {
+    border-radius: 1.25rem;
+    background: linear-gradient(180deg, rgba(18,7,23,0.85), rgba(12,8,18,0.7));
+    border: 1px solid rgba(255,255,255,0.02);
+    box-shadow: inset 0 12px 40px rgba(0,0,0,0.7);
+    padding: 1.25rem;
+  }
+
+  /* decorative blob helpers (absolute positioned colored glows) */
+  .blob-purple {
+    background: radial-gradient(circle at 30% 30%, rgba(139,92,246,0.25), rgba(139,92,246,0.06) 30%, transparent 60%);
+    filter: blur(36px);
+  }
+  .blob-yellow {
+    background: radial-gradient(circle at 70% 70%, rgba(250,181,112,0.25), rgba(250,181,112,0.06) 30%, transparent 60%);
+    filter: blur(36px);
+  }
+}
