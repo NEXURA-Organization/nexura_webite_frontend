@@ -12,7 +12,7 @@ export default function Navbar() {
       {/* Left: Logo pill */}
       <Link
         to="/"
-        className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#0f0d1a]/70 backdrop-blur-md border border-white/10 shadow-md"
+        className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#0f0d1a]/70 backdrop-blur-md border border-white/10 shadow-md hover:border-white/20 transition-all"
       >
         <img src={logo} alt="Nexura" className="h-6 w-auto" />
         <span className="font-semibold text-white">Nexura</span>
@@ -26,10 +26,10 @@ export default function Navbar() {
               key={link.name}
               to={link.href}
               className={({ isActive }) =>
-                `text-sm transition ${
+                `text-sm transition-all duration-300 ${
                   isActive
-                    ? "text-nexura-gradient  font-semibold"
-                    : "text-[rgba(255, 255, 255, 1)] hover:text-pink-800"
+                    ? "text-nexura-gradient font-semibold"
+                    : "text-white hover:text-[var(--nexura-purple)]"
                 }`
               }
             >
@@ -39,20 +39,22 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Right: CTA pill (desktop only) */}
+      {/* Right: CTA pill (desktop only) - FIXED LINK HERE */}
       <div className="hidden md:block">
-        <Button className="rounded-full !px-5 !py-2 bg-[#0f0d1a]/70 backdrop-blur-md border border-white/10 shadow-md">
-          Contact Us
-        </Button>
+        <Link to="/contact">
+          <Button className="rounded-full !px-5 !py-2 bg-[#0f0d1a]/70 backdrop-blur-md border border-white/10 shadow-md hover:bg-white/5 hover:border-white/30 transition-all">
+            Contact Us
+          </Button>
+        </Link>
       </div>
 
       {/* Mobile: Hamburger pill */}
       <button
-        className="md:hidden ml-auto px-4 py-2 bg-[#0f0d1a]/70 backdrop-blur-md  shadow-md text-gray-300 hover:text-white transition"
+        className="md:hidden ml-auto px-4 py-2 bg-[#0f0d1a]/70 backdrop-blur-md border border-white/10 rounded-full shadow-md text-gray-300 hover:text-white transition"
         onClick={() => setMenuOpen((s) => !s)}
         aria-label="Toggle menu"
       >
-        ☰
+        {menuOpen ? "✕" : "☰"}
       </button>
 
       {/* Mobile menu dropdown */}
@@ -64,7 +66,11 @@ export default function Navbar() {
                 key={link.name}
                 to={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-gray-300 hover:text-white transition"
+                className={({ isActive }) =>
+                  `text-sm py-2 transition ${
+                    isActive ? "text-nexura-gradient font-bold" : "text-gray-300"
+                  }`
+                }
               >
                 {link.name}
               </NavLink>
@@ -72,7 +78,7 @@ export default function Navbar() {
             <Link
               to="/contact"
               onClick={() => setMenuOpen(false)}
-              className="mt-4 inline-block btn-gradient rounded-full px-5 py-2"
+              className="mt-4 inline-block bg-gradient-to-r from-[var(--nexura-purple)] to-[var(--nexura-yellow)] text-white font-bold rounded-full px-5 py-3 shadow-lg"
             >
               Contact Us
             </Link>
